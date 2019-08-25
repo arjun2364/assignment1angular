@@ -1,0 +1,57 @@
+<div class="container">
+  <h2>Employee Form</h2>
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input id="firstName" name="firstName" class="form-control" [(ngModel)]="employee.firstName"
+            required #firstNameField="ngModel" 
+            (blur)="onBlur(firstNameField)"
+            [class.field-error]="form.submitted && firstNameField.invalid">
+      <div [hidden]="!form.submitted || firstNameField.valid"
+        class="alert alert-danger">
+        Enter a First Name
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="qualication">Qualication</label>
+      <select class="form-control" id="qualication" 
+              name="qualication" [(ngModel)]="employee.experience"
+              required #experienceField="ngModel" 
+            (blur)="onBlur(experienceField)"
+            [class.field-error]="form.submitted && experienceField.invalid">
+        <option *ngFor="let type of experience">
+          {{ type }}
+        </option>
+      </select>
+      <div [hidden]="!form.submitted || experienceField.valid"
+        class="alert alert-danger">
+        Enter Qualication
+      </div>
+    </div> 
+
+    <div class="form-group">
+      <label for="experience">Experience</label>
+      <select class="form-control" id="experience" 
+              name="experience" [(ngModel)]="employee.experience"
+              required #experienceField="ngModel" 
+            (blur)="onBlur(experienceField)"
+            [class.field-error]="form.submitted && experienceField.invalid">
+        <option *ngFor="let type of experience">
+          {{ type }}
+        </option>
+      </select>
+      <div [hidden]="!form.submitted || experienceField.valid"
+        class="alert alert-danger">
+        Enter Experience
+      </div>
+    </div> 
+
+    <div [hidden]="!postError"
+        class="alert alert-danger">
+        {{ postErrorMessage }}
+    </div>
+    <button class="btn btn-primary">Send</button>
+  </form>
+</div>
